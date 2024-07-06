@@ -40,46 +40,38 @@ Options:
 
 ## Examples
 
+1. Normal UTF-8 encoding
+
+```sh
+./utf8_overlong_encoder.py "../"
+# \x2E\x2E\x2F
+```
+
 1. Encode a string using standard UTF-8 and display in table format:
 
 ```sh
 ./utf8_overlong_encoder.py "../" -b normal -f table
-```
-
-Output:
-
-```
-+------+----------+----------------------------+
-| Char | Unicode  | Encoded (normal-byte-long) |
-+------+----------+----------------------------+
-| .    | U+002E   | \x2E                       |
-| .    | U+002E   | \x2E                       |
-| /    | U+002F   | \x2F                       |
-+------+----------+----------------------------+
+#+------+----------+----------------------------+
+#| Char | Unicode  | Encoded (normal-byte-long) |
+#+------+----------+----------------------------+
+#| .    | U+002E   | \x2E                       |
+#| .    | U+002E   | \x2E                       |
+#| /    | U+002F   | \x2F                       |
+#+------+----------+----------------------------+
 ```
 
 2. Encode a string using 3-byte overlong encoding and display as a string:
 
 ```sh
 ./utf8_overlong_encoder.py "../" -b 3 -f string
-```
-
-Output:
-
-```
-\xE0\x80\xAE\xE0\x80\xAE\xE0\x80\xAF
+# \xE0\x80\xAE\xE0\x80\xAE\xE0\x80\xAF
 ```
 
 3. Pipe input to the script and use 4-byte overlong encoding:
 
 ```sh
 echo "../" | ./utf8_overlong_encoder.py -b 4 -f string
-```
-
-Output:
-
-```
-\xF0\x80\x80\xAE\xF0\x80\x80\xAE\xF0\x80\x80\xAF
+# \xF0\x80\x80\xAE\xF0\x80\x80\xAE\xF0\x80\x80\xAF
 ```
 
 ### CVE related to UTF8 overlong
